@@ -1,0 +1,202 @@
+<!--<div *ngIf="loadingService.isLoading | async" class="loading-container">-->
+<!--    <app-loading></app-loading>-->
+<!--</div>-->
+
+
+<div class="block">
+
+
+  <div class="card">
+    <swal
+      #errorSwal
+      (confirm)="errorSwalFunc()"
+      [focusCancel]="true"
+      icon="error"
+    >
+      <div class="errorMessage">
+        <h3>{{errorCode}}</h3>
+        <h4>{{errorText}}</h4>
+      </div>
+    </swal>
+
+    <swal
+      #successSwal
+      (confirm)="successSwalFunc()"
+      [focusCancel]="true"
+      icon="success"
+    >
+      <div class="errorMessage">
+        <h3>Информация успешно сохранена</h3>
+
+      </div>
+    </swal>
+
+
+    <div class="card ">
+      <form [formGroup]="uzCardForm" (submit)="getCardInfo()">
+
+
+        <div class="block">
+          <label class="number-search" for="cardNumber">Card Number</label>
+          <!-- <p-inputMask mask="999999999" formControlName="number" placeholder="123456789" [maxlength]="9">
+  </p-inputMask>  -->
+          <input id="cardNumber" type="text" formControlName="cardNumber"
+                 nz-input>
+          <small class="p-invalid" *ngIf="uzCardForm.get('cardNumber')?.errors &&
+                    uzCardForm.get('cardNumber')?.touched">Card номер обязателен</small>
+        </div>
+
+        <!--                                <div class="p-col-12  p-md-4 p-lg-2">-->
+        <!--                                    <label class="number-search" for="cardExpiry">Card Expiry Date</label>-->
+        <!--                                    &lt;!&ndash; <p-inputMask mask="999999999" formControlName="number" placeholder="123456789" [maxlength]="9">-->
+        <!--                            </p-inputMask>  &ndash;&gt;-->
+        <!--                                    <input id="cardExpiry" type="text" formControlName="cardExpiry"-->
+        <!--                                           pInputText>-->
+        <!--                                    <small class="p-invalid" *ngIf="uzCardForm.get('cardExpiry').errors &&-->
+        <!--                    uzCardForm.get('cardExpiry').touched">Card Expiry Date номер обязателен</small>-->
+        <!--                                </div>-->
+
+        <div class="btn-block">
+          <button nz-button nzType="primary" nzShape="round" type="submit" [disabled]="!this.uzCardForm.valid ">
+            <i nz-icon nzType="download"></i>
+            Download
+          </button>
+          <!--                                    <button pButton pRipple  label="Отправить"-->
+          <!--                                           ></button>-->
+        </div>
+
+      </form>
+
+    </div>
+
+    <form [formGroup]="cardInfoForm" *ngIf="uzCardShow">
+      <div class="box ">
+        <div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">Id:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="id" readonly/>
+
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">ResultId:</h3>
+            <div class="info-text">
+              <textarea nz-input formControlName="resultId" readonly autosize></textarea> `
+
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> User Name:</h3>
+            <div class="info-text">
+              <textarea nz-input formControlName="username" readonly autosize></textarea> `
+
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">Pan:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="pan" readonly/>
+
+            </div>
+          </div>
+          <!--                        -->
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> Expiry:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="expiry" readonly/>
+
+            </div>
+
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">Status:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="status" readonly/>
+            </div>
+          </div>
+          <!---->
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> Phone</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="phone" readonly/>
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">FullName:</h3>
+            <div class="info-text">
+              <textarea nz-input formControlName="fullName" readonly autosize></textarea> `
+            </div>
+          </div>
+
+          <!---->
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">Balance:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="balance" readonly/>
+
+            </div>
+          </div>
+
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> SMS:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="sms" readonly/>
+
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">Pincnt:</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="pincnt" readonly/>
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> Card Type</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="cardtype" readonly/>
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> Hold Amount</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="holdAmount" readonly/>
+            </div>
+          </div>
+
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle"> Cashback Amount</h3>
+            <div class="info-text">
+              <input nz-input placeholder="нет информации" formControlName="cashbackAmount" readonly/>
+            </div>
+          </div>
+
+          <div nz-col class="gutter-row info-box" [nzSpan]="6">
+            <h3 class="info-subtitle">AACCT:</h3>
+            <div class="info-text">
+              <textarea nz-input formControlName="aacct" readonly autosize></textarea> `
+            </div>
+          </div>
+
+
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+
+
+</div>
